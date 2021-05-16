@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/ubuntu/liupeng/MiniMuduo/build",
+  "command": "/usr/bin/c++  -Dmymuduo_EXPORTS    -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/InetAddress.cc.o -c /home/ubuntu/liupeng/MiniMuduo/InetAddress.cc",
+  "file": "/home/ubuntu/liupeng/MiniMuduo/InetAddress.cc"
+},
+{
+  "directory": "/home/ubuntu/liupeng/MiniMuduo/build",
+  "command": "/usr/bin/c++  -Dmymuduo_EXPORTS    -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/Logger.cc.o -c /home/ubuntu/liupeng/MiniMuduo/Logger.cc",
+  "file": "/home/ubuntu/liupeng/MiniMuduo/Logger.cc"
+},
+{
+  "directory": "/home/ubuntu/liupeng/MiniMuduo/build",
+  "command": "/usr/bin/c++  -Dmymuduo_EXPORTS    -g -std=c++11 -g -fPIC   -o CMakeFiles/mymuduo.dir/Timestamp.cc.o -c /home/ubuntu/liupeng/MiniMuduo/Timestamp.cc",
+  "file": "/home/ubuntu/liupeng/MiniMuduo/Timestamp.cc"
+}
+]

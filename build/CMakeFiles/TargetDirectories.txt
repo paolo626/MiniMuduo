@@ -1,0 +1,3 @@
+/home/ubuntu/liupeng/MiniMuduo/build/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/liupeng/MiniMuduo/build/CMakeFiles/mymuduo.dir
+/home/ubuntu/liupeng/MiniMuduo/build/CMakeFiles/edit_cache.dir
