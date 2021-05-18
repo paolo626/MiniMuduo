@@ -11,6 +11,8 @@ Description:   this is class for user to used this lib. it organize all class.
 ************************************************/
 
 
+#pragma once 
+ 
 class TcpServer{
 
 };
