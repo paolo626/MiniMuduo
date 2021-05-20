@@ -31,7 +31,8 @@ public:
 	using EventCallback = std::function<void()>;  
 	// function is a object  that it ()operator  pointer void(TimeStamp), so we can save this function eveywhere.
 	// using is another name of std::function<void(TimeStamp)>. 
-	using ReadEventCallBack = std::function<void(Timestamp)>;
+	using ReadEventCallback = std::function<void(Timestamp)>;
+
 	Channel(EventLoop* Loop, int fd);  // this is pointer ,so it used just declare.
 	~Channel();
 	// this is callback fc that the fc  will register by other std::function<void()>; 
@@ -39,7 +40,7 @@ public:
 	void handleEvent(Timestamp receiveTime);
 
 	// define callback object  ,we make another fc object move to channel local var; 
-	void setReadCallback(ReadEventCallBack cb){	readCallback_ = std::move(cb); }
+	void setReadCallback(ReadEventCallback cb){	readCallback_ = std::move(cb); }
 
 	void setWriteCallback(EventCallback cb){writeCallback_ = std::move(cb); }	
 
@@ -92,7 +93,8 @@ private:
 
 	// channel can get revoke event  in revents_ , so we define callback for revoke used. 
 	// these four callback is define by user, just using in this.
-	ReadEventCallBack readCallback_;
+	ReadEventCallback readCallback_;
+	
 	EventCallback  writeCallback_;
 	EventCallback  closeCallback_;
 	EventCallback  errorCallback_;

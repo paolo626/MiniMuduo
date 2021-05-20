@@ -5,49 +5,7 @@
 #include "Timestamp.h"
 
 
-// we use  define function make user using this logger class more easy 
-// for user  just using  LOG_INFO define  is able to writing log 
-#define  LOG_INFO(LogmsgFormat,...)\
-	do{\
-		Logger & logger  = Logger::instance();\
-		logger.setLogLevel(INFO);\
-		char  buf[1024] = {0};\
-		snprintf(buf , 1024 , LogmsgFormat, ##__VA_ARGS);\
-		logger.log(buf);\
-	}while(0)
 
-
-#define  LOG_ERROR(LogmsgFormat,...)\
-	do{\
-		Logger & logger  = Logger::instance();\
-		logger.setLogLevel(ERROR);\
-		char  buf[1024] = {0};\
-		snprintf(buf , 1024 , LogmsgFormat, ##__VA_ARGS);\
-		logger.log(buf);\
-	}while(0)
-
-
-#define  LOG_FATAL(LogmsgFormat,...)\
-	do{\
-		Logger & logger  = Logger::instance();\
-		logger.setLogLevel(FATAL);\
-		char  buf[1024] = {0};\
-		snprintf(buf , 1024 , LogmsgFormat, ##__VA_ARGS);\
-		logger.log(buf);\
-	}while(0)
-
-#ifdef MUDEBUG  // the debug log normally is closed status 
-#define  LOG_DEBUG(LogmsgFormat,...)\
-	do{\
-		Logger & logger  = Logger::instance();\
-		logger.setLogLevel(DEBUG);\
-		char  buf[1024] = {0};\
-		snprintf(buf , 1024 , LogmsgFormat, ##__VA_ARGS);\
-		logger.log(buf);\
-	}while(0)		
-#else
-	#define  LOG_DEBUG(LogmsgFormat,...)
-#endif
 
 
 Logger& Logger::instance(){
