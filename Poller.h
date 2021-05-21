@@ -15,7 +15,7 @@ Description:   poller calss help we using epoll easily.
 #include<unordered_map>
 
 
-#inlcude "TimeStap.h"
+#include "Timestamp.h"
 class Channel;
 class EventLoop;
 
@@ -34,7 +34,7 @@ public:
 
 
 	// singleton to get instance from base class.
-	static Poller newDefaultPoller(EventLoop *Loop);
+	static Poller* newDefaultPoller(EventLoop *Loop);
 
 
 protected:

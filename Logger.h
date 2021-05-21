@@ -30,28 +30,28 @@ status when runing
 	}while(0)
 
 
-#define  LOG_ERROR(LogmsgFormat,...)\
+#define  LOG_ERROR(LogmsgFormat, ...)\
 	do{\
 		Logger & logger  = Logger::instance();\
 		logger.setLogLevel(ERROR);\
 		char  buf[1024] = {0};\
-		snprintf(buf , 1024 , LogmsgFormat, ##__VA_ARGS);\
+		snprintf(buf, 1024, LogmsgFormat, ##__VA_ARGS__); \
 		logger.log(buf);\
 	}while(0)
 
 
-#define  LOG_FATAL(LogmsgFormat,...)\
+#define  LOG_FATAL(LogmsgFormat, ...)\
 	do{\
 		Logger & logger  = Logger::instance();\
 		logger.setLogLevel(FATAL);\
 		char  buf[1024] = {0};\
-		snprintf(buf , 1024 , LogmsgFormat, ##__VA_ARGS);\
+		snprintf(buf, 1024, LogmsgFormat, ##__VA_ARGS__); \
 		logger.log(buf);\
 		exit(-1);\
 	}while(0)
 
 #ifdef MUDEBUG  // the debug log normally is closed status 
-#define  LOG_DEBUG(LogmsgFormat,...)\
+#define  LOG_DEBUG(LogmsgFormat, ...)\
 	do{\
 		Logger & logger  = Logger::instance();\
 		logger.setLogLevel(DEBUG);\

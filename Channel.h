@@ -44,7 +44,7 @@ public:
 
 	void setWriteCallback(EventCallback cb){writeCallback_ = std::move(cb); }	
 
-	void setCloseCallback(EventCallback cb){closeCallback_ = std::move(cb); }	
+	void setCloseCallback(EventCallback cb){wakeupChannel_ = std::move(cb); }	
 	void setErrorCallback(EventCallback cb){errorCallback_ = std::move(cb); }	
 
 	//  this using weak to detective that   shared pointer is alive. make sure that channel is onwork

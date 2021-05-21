@@ -1,9 +1,12 @@
 
 #include <string.h>
+#include <unistd.h>
+#include<string.h>
 
 #include "EPollPoller.h"
 #include "Logger.h"
 #include "Channel.h"
+#include "Timestamp.h"
 
 // the status of channel.
 
@@ -13,6 +16,8 @@ const int kNew = -1;
 const int kAdded = 1;
 // had delete
 const int kDeleted = 2;
+
+
 EPollPoller::EPollPoller(EventLoop *Loop)
 : Poller(Loop),epollfd_(::epoll_create1(EPOLL_CLOEXEC)),events_(kInitEventListSize){ //when sub-process is fork , the derive fd from main-process will close.
 	if(epollfd_ < 0){
@@ -24,12 +29,46 @@ EPollPoller::~EPollPoller(){
 	::close(epollfd_);
 }
 
-
 // epoll wait
 Timestamp EPollPoller::poll( int timeoutMs, ChannelList *activeChannels) {
+	LOG_INFO("func = %s =>  fd total count = %lu  \n",__FUNCTION__ ,channels_.size());
+
+	int numEvents = ::epoll_wait(epollfd_ , &*events_.begin(),static_cast<int>(events_.size()),timeoutMs);
+	int saveErrno  = errno;  // errno is system var.  we save it in multi-pthread
+	Timestamp now(Timestamp::now());
+
+	if(numEvents > 0){
+		LOG_INFO("event happend  \n");
+		fillActiveChannels(numEvents, activeChannels);
+		if(numEvents ==events_.size()){
+			events_.resize(events_.size()*2);  // because muduo used LT  so we just resize double size and not deal in this loop , the event will happened again in the next time.
+		} 
+			
+	}
+	else if(numEvents ==0){     
+		LOG_DEBUG("func = %s time out \n",__FUNCTION__ );
+	}
+	
+	else{
+		if(saveErrno != EINTR){  // 
+			errno = saveErrno;  // it avoid  multi-pthread confliect.
+			LOG_ERROR("EPollPoller::poll() error");
+
+		}
+	}
+
+	return now;
+}
+	
 
 
-
+void EPollPoller::fillActiveChannels(int numEvents , ChannelList *activeChannels) const{
+	for( int i = 0 ; i<numEvents; ++i){
+		Channel * channel = static_cast<Channel *>(events_[i].data.ptr);     //static_cast  make the void *  of data.ptr  to channel *
+		channel->set_revents(events_[i].events);
+		activeChannels->push_back(channel);    // the event actived by epoller will give ChannelList . it will been used by EventLoop
+	}
+	
 }
 
 
@@ -42,7 +81,7 @@ void EPollPoller::updateChannel(Channel *channel){
 		if(index ==kNew){
 			int fd = channel->fd();
 			channel->set_index(kAdded);
-			update(EPOLL_CTL_ADD,channel)；
+			update(EPOLL_CTL_ADD,channel);
 		}
 		else{    //already add
 			int fd = channel->fd();
@@ -62,7 +101,7 @@ void EPollPoller::updateChannel(Channel *channel){
 
 void EPollPoller::update(int operation , Channel *channel){
 	struct epoll_event event;
-	memset(event, 0, sizeof(event));
+	bzero(&event,  sizeof(event));
 	event.events = channel->events(); // interest event register.
 	int fd = channel->fd();
 	event.data.fd = fd;
@@ -90,5 +129,5 @@ void EPollPoller::removeChannel(Channel * channel){
 	}
 	channel->set_index(kNew);
 
-}
+};
 

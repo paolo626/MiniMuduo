@@ -14,7 +14,7 @@
  * */
 class EPollPoller: public Poller{
 public :
-	EPollPoller(EventLopp *Loop);
+	EPollPoller(EventLoop *Loop);
 	~EPollPoller() override;
 
 	// re-writing   fc of virtual
@@ -37,4 +37,4 @@ private:
 	int epollfd_;
 	EventList events_;
 
-}
+};
