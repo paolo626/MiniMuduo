@@ -7,7 +7,6 @@
 
 
 
-
 Logger& Logger::instance(){
 	 static  Logger  logger;  // pthreat safe 
 	 return logger;
