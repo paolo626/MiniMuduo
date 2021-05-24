@@ -1,5 +1,9 @@
 # MiniMuduo
-Here is a  mini version of muduo. it inspired by chengshuo 
+Here is a  mini version of muduo. it inspired by chengshuo.
+
+# 介绍
+
+
 
 
 # 编程问题
@@ -14,6 +18,7 @@ Here is a  mini version of muduo. it inspired by chengshuo
 8.  How to get address  of vector ?  &*myvector.begin();  , the *myvector.begin() get var , & get address.
 9. 宏定义的内容必须严格遵循规则， 我多加了个空格都不行， 服了。 
 10.  thread_local 在多线程设置不共享的变量，但是也不在代码段。 例如我们定义 thread_local 用来获取多线程的id， 虽然在全局位置 ，但是不共享。 
+11.  不需要排序的情况下 用unordered_map 更高效。
 
 
 ## 设计问题
@@ -21,3 +26,5 @@ Here is a  mini version of muduo. it inspired by chengshuo
 2. muduo库是框架， 所以设计时候不是面向过程思想，没有实际业务， 只是为了封装功能让其他人使用，所以理解为什么要这样做的时候， 没有实际的业务做支持难以理解。 不像tinywebsever就是为了实现一个功能，而不是封装成库。（不过也有一定的思想）
 
 
+# 版本记录
+1.  这个项目和我之前的web服务器比较相似，但是这个更难一些，因为web服务器是项目， 这个是框架， 框架设计时候要考虑很多细节。 这里先放弃。 专心放在聊天服务器项目上。 

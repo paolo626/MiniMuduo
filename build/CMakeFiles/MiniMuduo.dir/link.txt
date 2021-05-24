@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC   -g -std=c++11 -g  -shared -Wl,-soname,libMiniMuduo.so -o ../lib/libMiniMuduo.so CMakeFiles/MiniMuduo.dir/Logger.cc.o CMakeFiles/MiniMuduo.dir/Timestamp.cc.o 
